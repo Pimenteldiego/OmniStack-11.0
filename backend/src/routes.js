@@ -29,7 +29,12 @@ routes.get('/profile', celebrate({
     }).unknown(),
 }), ProfileController.index);
 
-routes.get('/incidents', celebrate({
+const getIncidentsLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+});
+
+routes.get('/incidents', getIncidentsLimiter, celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
     }),
