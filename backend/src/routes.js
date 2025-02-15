@@ -1,5 +1,6 @@
 const express = require('express');
-const{ celebrate, Segments, Joi } = require('celebrate');
+const { celebrate, Segments, Joi } = require('celebrate');
+const rateLimit = require('express-rate-limit');
 
 const OngController = require('./controllers/OngController');
 const IncidentController = require('./controllers/IncidentController');
@@ -45,7 +46,12 @@ routes.post('/incidents', celebrate({
     }),
 }), IncidentController.create);
 
-routes.delete('/incidents/:id', celebrate({
+const deleteIncidentLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+});
+
+routes.delete('/incidents/:id', deleteIncidentLimiter, celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required(),
     })
