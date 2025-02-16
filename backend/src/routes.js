@@ -39,7 +39,7 @@ routes.get('/profile', getProfileLimiter, celebrate({
         [Segments.HEADERS]: Joi.object({
             authorization: Joi.string().required(),
         }).unknown(),
-    }), ProfileController.index);
+    }), ProfileController.index;
 
 const getIncidentsLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
