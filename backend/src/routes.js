@@ -21,6 +21,13 @@ const getOngsLimiter = rateLimit({
 });
 routes.get('/ongs', getOngsLimiter, OngController.index);
 
+const createOngLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+});
+
+routes.post('/ongs', createOngLimiter, celebrate({
+
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
