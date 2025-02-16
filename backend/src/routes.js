@@ -9,18 +9,16 @@ const SessionController = require('./controllers/SessionController');
 
 const routes = express.Router();
 
-
-
-
-
-
-
 const createSessionLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100, // limit each IP to 100 requests per windowMs
 });
 routes.post('/sessions', createSessionLimiter, SessionController.create);
 
+const getOngsLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+});
 routes.get('/ongs', getOngsLimiter, OngController.index);
 
 routes.post('/ongs', celebrate({
