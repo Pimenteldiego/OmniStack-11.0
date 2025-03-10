@@ -33,5 +33,8 @@
   "devDependencies": {
   "axios": ">=1.8.2"
 },
+  "dependencies": {
+  "react-native-reanimated": ">=2.10.0"
+},
   "private": true
 }
