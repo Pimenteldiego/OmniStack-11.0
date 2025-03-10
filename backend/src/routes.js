@@ -76,7 +76,7 @@ routes.get('/ongs', createRateLimiter(), OngController.index);
 routes.post('/ongs', createRateLimiter(), celebrate(sessionSchema), OngController.create);
 routes.get('/profile', createRateLimiter(), celebrate(profileSchema), ProfileController.index);
 routes.get('/incidents', createRateLimiter(), celebrate(querySchema), IncidentController.index);
-routes.post('/incidents', celebrate(incidentSchema), IncidentController.create);
+routes.post('/incidents', createRateLimiter(), celebrate(incidentSchema), IncidentController.create);
 routes.delete('/incidents/:id', createRateLimiter(), celebrate(paramsSchema), IncidentController.delete);
 
 module.exports = routes;
