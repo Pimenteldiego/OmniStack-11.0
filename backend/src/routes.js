@@ -26,9 +26,10 @@ const createOngLimiter = rateLimit({
     max: 100, // limit each IP to 100 requests per windowMs
 });
 
-routes.post('/ongs', createOngLimiter, celebrate({
+routes.post('/sessions', createRateLimiter(), SessionController.create);
+routes.get('/ongs', createRateLimiter(), OngController.index);
 
-routes.post('/ongs', celebrate({
+routes.post('/ongs', createRateLimiter(), celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
         email: Joi.string().required().email(),
@@ -36,7 +37,7 @@ routes.post('/ongs', celebrate({
         city: Joi.string().required(),
         uf: Joi.string().required().length(2),
     })
-}), OngController.create);   
+}), OngController.create);  
 
 const getProfileLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
