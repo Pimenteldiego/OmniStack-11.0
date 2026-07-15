@@ -26,8 +26,8 @@
     "extends": "react-app"
   },
   
-  "devDependencies": {
-  "axios": ">=1.16.0"
+  "dependencies": {
+  "axios": ">=0.32.0"
   },
   "browserslist": {
     "production": [
