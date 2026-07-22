@@ -31,7 +31,7 @@
     "@babel/core": "^7.0.0"
   },
   "devDependencies": {
-  "axios": ">=1.16.0"
+  "axios": ">=1.18.0"
 },
   "dependencies": {
   "react-native-reanimated": ">=2.10.0"
